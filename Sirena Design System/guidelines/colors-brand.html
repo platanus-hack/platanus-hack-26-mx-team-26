@@ -1,0 +1,57 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Brand palette" subtitle="Coral · Crimson · Gold · Fern — warm, human, no AI violet/teal" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--bg); font-family: var(--font-body); }
+  .row { display: flex; gap: 12px; }
+  .col { flex: 1; }
+  .chips { display: flex; flex-direction: column; gap: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .chip { height: 32px; display: flex; align-items: center; padding: 0 12px; font-family: var(--font-mono); font-size: 11px; }
+  .name { margin: 0 0 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+  .lead { font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="col">
+      <p class="name">Coral · primary</p>
+      <div class="chips">
+        <div class="chip" style="background:var(--coral-100);color:var(--coral-700)">100</div>
+        <div class="chip" style="background:var(--coral-300);color:var(--coral-800)">300</div>
+        <div class="chip lead" style="background:var(--coral-500);color:#fff">500 · F2502E</div>
+        <div class="chip" style="background:var(--coral-700);color:#fff">700</div>
+      </div>
+    </div>
+    <div class="col">
+      <p class="name">Crimson · accent</p>
+      <div class="chips">
+        <div class="chip" style="background:var(--crimson-100);color:var(--crimson-700)">100</div>
+        <div class="chip" style="background:var(--crimson-300);color:var(--crimson-700)">300</div>
+        <div class="chip lead" style="background:var(--crimson-500);color:#fff">500 · A21E4A</div>
+        <div class="chip" style="background:var(--crimson-700);color:#fff">700</div>
+      </div>
+    </div>
+    <div class="col">
+      <p class="name">Gold · highlight</p>
+      <div class="chips">
+        <div class="chip" style="background:var(--gold-100);color:var(--gold-700)">100</div>
+        <div class="chip" style="background:var(--gold-300);color:var(--gold-700)">300</div>
+        <div class="chip lead" style="background:var(--gold-400);color:#3A2A04">400 · E9A50F</div>
+        <div class="chip" style="background:var(--gold-600);color:#fff">600</div>
+      </div>
+    </div>
+    <div class="col">
+      <p class="name">Fern · signal</p>
+      <div class="chips">
+        <div class="chip" style="background:var(--fern-100);color:var(--fern-600)">100</div>
+        <div class="chip" style="background:var(--fern-300);color:var(--fern-600)">300</div>
+        <div class="chip lead" style="background:var(--fern-500);color:#fff">500 · 1E8344</div>
+        <div class="chip" style="background:var(--fern-600);color:#fff">600</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

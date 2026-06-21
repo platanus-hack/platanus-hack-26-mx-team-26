@@ -1,0 +1,62 @@
+/* ============================================================
+   SIRENA · TYPOGRAPHY TOKENS
+   Display: Space Grotesk · Body: Manrope · Data/IDs: Space Mono
+
+   TYPE SYSTEM — 3 SIZES ONLY:
+     --sz-sm  (12px) → labels, metadata, mono captions, badges
+     --sz-md  (14px) → body copy, table cells, descriptions
+     --sz-lg  (20px) → headings, section titles, card names
+   Numbers/KPIs in cards use --sz-num (30px) as data-ink,
+   not flowing text — they are visual marks, not type.
+   ============================================================ */
+:root {
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* ── THE 3 TEXT SIZES ──────────────────────────────── */
+  --sz-sm: 12px;  /* labels, eyebrows, metadata, mono captions  */
+  --sz-md: 14px;  /* body copy, table rows, descriptions        */
+  --sz-lg: 20px;  /* page titles, section heads, card headings  */
+
+  /* ── DATA INK (not flowing text — KPI numbers in cards) ─── */
+  --sz-num-sm:  22px;  /* small stats (ribbon, mini-cards)      */
+  --sz-num-md:  30px;  /* main metric card values               */
+  --sz-num-lg:  40px;  /* hero numbers (hackability score)      */
+
+  /* ── PAGE-LEVEL HEADING (one per screen, not body text) ─── */
+  --sz-h1: 28px;
+
+  /* Kept for token compatibility */
+  --text-2xs: var(--sz-sm);
+  --text-xs:  var(--sz-sm);
+  --text-sm:  var(--sz-md);
+  --text-md:  var(--sz-md);
+  --text-lg:  var(--sz-lg);
+  --text-xl:  var(--sz-lg);
+  --text-2xl: var(--sz-num-sm);
+  --text-3xl: var(--sz-h1);
+  --text-4xl: var(--sz-num-lg);
+  --text-5xl: 52px;
+  --text-6xl: 66px;
+
+  /* Weights */
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-extra:    800;
+
+  /* Line heights */
+  --lh-tight:   1.08;
+  --lh-snug:    1.25;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.65;
+
+  /* Letter spacing */
+  --ls-tight:  -0.02em;
+  --ls-snug:   -0.01em;
+  --ls-normal: 0;
+  --ls-wide:   0.04em;
+  --ls-caps:   0.08em;
+}

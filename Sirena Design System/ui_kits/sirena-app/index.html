@@ -1,0 +1,99 @@
+<!-- @dsCard group="Sirena App" viewport="1320x860" name="Consola Sirena" subtitle="App web: Resumen · Personas · Voces · Lanzamiento" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sirena · Consola</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="app.css">
+<script>
+  // Apply saved theme before paint
+  try { var t = localStorage.getItem('sirena-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="data.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="Shell.jsx"></script>
+  <script type="text/babel" src="DashboardScreen.jsx"></script>
+  <script type="text/babel" src="UsersScreen.jsx"></script>
+  <script type="text/babel" src="VoiceLibraryScreen.jsx"></script>
+  <script type="text/babel" src="LaunchScreen.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const TITLES = {
+      resumen:  ['Resumen',             'Estado de seguridad de Platanus Org'],
+      personas: ['Personas',            'Resultados de simulación por persona'],
+      voces:    ['Biblioteca de voces', 'Muestras consentidas'],
+      campanas: ['Campañas',            'Historial de simulaciones'],
+      lanzar:   ['Sala de lanzamiento', 'Activar una prueba de vishing'],
+    };
+
+    function App() {
+      const [view, setView] = React.useState('resumen');
+
+      React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
+
+      const [title, sub] = TITLES[view];
+      let screen;
+      if (view === 'resumen')  screen = <window.DashboardScreen openCampaigns={() => setView('lanzar')} />;
+      else if (view === 'personas') screen = <window.UsersScreen />;
+      else if (view === 'voces') screen = <window.VoiceLibraryScreen />;
+      else if (view === 'lanzar') screen = <window.LaunchScreen />;
+      else if (view === 'campanas') screen = <window.CampaignsScreen />;
+
+      return (
+        <window.Shell view={view} setView={setView} title={title} sub={sub} onLaunch={() => setView('lanzar')}>
+          {screen}
+        </window.Shell>
+      );
+    }
+
+    // Campañas reuses the dashboard activity as a full table view
+    window.CampaignsScreen = function () {
+      const { Card, StatusPill, Badge, Button } = window.SirenaDesignSystem_c1cb8e;
+      const D = window.SirenaData;
+      const L = { live: 'En vivo', success: 'Completada', scheduled: 'Programada', draft: 'Borrador' };
+      return (
+        <div>
+          <div className="page-head">
+            <div className="eyebrow">6 campañas · 2 en vivo</div>
+            <h1>Campañas</h1>
+            <p>Cada simulación de vishing que has lanzado, con sus resultados.</p>
+          </div>
+          <Card padding="sm">
+            <table className="tbl">
+              <thead><tr><th>Campaña</th><th>Canal</th><th>Estado</th><th>Enviados</th><th>Resistió</th><th>Cayó</th><th></th></tr></thead>
+              <tbody>
+                {D.campaigns.map((c) => {
+                  const m = D.channelMeta[c.channel];
+                  return (
+                    <tr className="row" key={c.id}>
+                      <td><b style={{ color: 'var(--text-strong)' }}>{c.name}</b><div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>{c.id} · {c.when}</div></td>
+                      <td><Badge tone={m.tone} icon={m.icon} size="sm">{m.label}</Badge></td>
+                      <td><StatusPill status={c.status === 'success' ? 'success' : c.status}>{L[c.status]}</StatusPill></td>
+                      <td style={{ fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{c.sent || '—'}</td>
+                      <td style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: c.resisted ? 'var(--success)' : 'var(--text-faint)' }}>{c.resisted || '—'}</td>
+                      <td style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: c.compromised ? 'var(--danger)' : 'var(--text-faint)' }}>{c.compromised || '—'}</td>
+                      <td><Button variant="ghost" size="sm" iconRight="chevron-right">Ver</Button></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </Card>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

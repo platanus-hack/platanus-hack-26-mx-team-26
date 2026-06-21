@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" viewport="700x160" name="Corner radii" subtitle="Soft & rounded — the Sirena signature" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--bg); font-family: var(--font-mono); }
+  .row { display: flex; gap: 16px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .box { width: 74px; height: 74px; background: var(--crimson-100); border: 1.5px solid var(--crimson-400); }
+  .lbl { font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius:var(--radius-xs)"></div><span class="lbl">xs · 6</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-sm)"></div><span class="lbl">sm · 10</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-md)"></div><span class="lbl">md · 14</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-lg)"></div><span class="lbl">lg · 20</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-xl)"></div><span class="lbl">xl · 28</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-pill)"></div><span class="lbl">pill</span></div>
+  </div>
+</body>
+</html>

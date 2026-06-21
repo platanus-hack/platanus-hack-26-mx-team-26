@@ -1,0 +1,164 @@
+/* ============================================================
+   SIRENA · COLOR TOKENS — "Slate & Steel"
+   Cool-authority palette: deep slate base · steel blue primary
+   · indigo accent · sage green success · dusty rose danger.
+   Desaturated enough to avoid neon; clear enough to read.
+   ============================================================ */
+
+:root {
+  /* --- Steel blue · primary (authoritative, not electric) ---- */
+  --cyan-50:  #EFF6FB;
+  --cyan-100: #D6E8F5;
+  --cyan-200: #A8CCEB;
+  --cyan-300: #74AADA;
+  --cyan-400: #4E8FBF;   /* primary (dark mode) */
+  --cyan-500: #2E6A96;   /* primary (light mode) */
+  --cyan-600: #1F5278;
+  --cyan-700: #153D5C;
+  --cyan-800: #0E2D45;
+
+  /* --- Indigo · accent / secondary (depth, security) --------- */
+  --violet-50:  #F0F0FB;
+  --violet-100: #D8D9F6;
+  --violet-200: #AEAFE7;
+  --violet-300: #8485D4;
+  --violet-400: #6163BF;  /* accent (dark mode) */
+  --violet-500: #4547A8;  /* accent (light mode) */
+  --violet-600: #343590;
+  --violet-700: #272877;
+
+  /* --- Sage green · signal / voice / positive ---------------- */
+  --emerald-50:  #EEF7F2;
+  --emerald-100: #CEEADB;
+  --emerald-200: #96CEAE;
+  --emerald-300: #62B080;
+  --emerald-400: #3A9460;  /* signal (dark mode) */
+  --emerald-500: #27794A;  /* signal (light mode) */
+  --emerald-600: #1B5E38;
+  --emerald-700: #124629;
+
+  /* --- Neutrals · cool blue-slate ---------------------------- */
+  --n-0:   #FFFFFF;
+  --n-25:  #F7F9FC;
+  --n-50:  #EFF2F7;
+  --n-100: #DDE3EE;
+  --n-200: #C2CCDB;
+  --n-300: #8E9DB8;
+  --n-400: #5E708A;
+  --n-500: #425268;
+  --n-600: #2E3C52;
+  --n-700: #1C2A3E;
+  --n-800: #101C2E;
+  --n-900: #081120;
+  --n-950: #040A15;
+
+  /* --- Semantic status palettes ----------------------------- */
+  --success-50:  #EEF7F2;  --success-500: #27794A;  --success-600: #1B5E38;
+  --warning-50:  #FAF4E6;  --warning-500: #956B20;  --warning-600: #7A5519;
+  --danger-50:   #F8EEED;  --danger-500:  #A03830;  --danger-600:  #842C26;
+  --info-50:     #EEF3FA;  --info-500:    #3060A0;  --info-600:    #254D84;
+}
+
+/* ============================================================
+   LIGHT MODE
+   ============================================================ */
+[data-theme="light"] {
+  --bg:             var(--n-50);
+  --bg-pattern:     var(--n-100);
+  --surface:        var(--n-0);
+  --surface-raised: var(--n-0);
+  --surface-sunken: var(--n-25);
+  --surface-inset:  var(--n-100);
+
+  --border:         var(--n-200);
+  --border-strong:  var(--n-300);
+  --border-faint:   var(--n-100);
+
+  --text-strong:    var(--n-900);
+  --text-body:      var(--n-700);
+  --text-muted:     var(--n-500);
+  --text-faint:     var(--n-400);
+
+  --primary:        var(--cyan-500);
+  --primary-hover:  var(--cyan-600);
+  --primary-press:  var(--cyan-700);
+  --primary-soft:   var(--cyan-50);
+  --primary-softer: var(--cyan-100);
+  --on-primary:     #FFFFFF;
+
+  --accent:         var(--violet-500);
+  --accent-hover:   var(--violet-600);
+  --accent-soft:    var(--violet-50);
+  --on-accent:      #FFFFFF;
+
+  --signal:         var(--emerald-500);
+  --signal-soft:    var(--emerald-50);
+
+  --highlight:      var(--cyan-500);
+  --highlight-soft: var(--cyan-50);
+  --on-highlight:   #FFFFFF;
+
+  --success:        var(--success-500);  --success-soft: var(--success-50);
+  --warning:        var(--warning-500);  --warning-soft: var(--warning-50);
+  --danger:         var(--danger-500);   --danger-soft:  var(--danger-50);
+  --info:           var(--info-500);     --info-soft:    var(--info-50);
+
+  --focus-ring:     color-mix(in oklch, var(--cyan-500) 45%, transparent);
+  --overlay:        color-mix(in oklch, var(--n-950) 50%, transparent);
+  color-scheme: light;
+}
+
+/* ============================================================
+   DARK MODE · "Slate & Steel" (default)
+   Vivid interactive colors on dark backgrounds.
+   Backgrounds stay deep/muted. Colors are saturated but not neon.
+   ============================================================ */
+[data-theme="dark"] {
+  --bg:             #070D18;
+  --bg-pattern:     #090F1C;
+  --surface:        #0D1525;
+  --surface-raised: #111A2C;
+  --surface-sunken: #080E1C;
+  --surface-inset:  #141E30;
+
+  --border:         #1C2840;
+  --border-strong:  #283858;
+  --border-faint:   #121C30;
+
+  --text-strong:    #D8E4F0;
+  --text-body:      #9AAFC8;
+  --text-muted:     #607590;
+  --text-faint:     #3D5068;
+
+  /* Primary: vivid sky blue */
+  --primary:        #3D9FD8;
+  --primary-hover:  #56B4EC;
+  --primary-press:  #2880B8;
+  --primary-soft:   color-mix(in oklch, #3D9FD8 14%, #0D1525);
+  --primary-softer: color-mix(in oklch, #3D9FD8 22%, #0D1525);
+  --on-primary:     #00172A;
+
+  /* Accent: vivid violet-blue */
+  --accent:         #8080E0;
+  --accent-hover:   #9898EC;
+  --accent-soft:    color-mix(in oklch, #8080E0 14%, #0D1525);
+  --on-accent:      #0C0C2A;
+
+  /* Signal: vivid emerald */
+  --signal:         #38B072;
+  --signal-soft:    color-mix(in oklch, #38B072 14%, #0D1525);
+
+  --highlight:      #3D9FD8;
+  --highlight-soft: color-mix(in oklch, #3D9FD8 14%, #0D1525);
+  --on-highlight:   #00172A;
+
+  /* Status: vivid but not neon */
+  --success:      #38B072;  --success-soft: color-mix(in oklch, #38B072 14%, #0D1525);
+  --warning:      #C8920A;  --warning-soft: color-mix(in oklch, #C8920A 14%, #0D1525);
+  --danger:       #D04848;  --danger-soft:  color-mix(in oklch, #D04848 14%, #0D1525);
+  --info:         #3D9FD8;  --info-soft:    color-mix(in oklch, #3D9FD8 14%, #0D1525);
+
+  --focus-ring:     color-mix(in oklch, #3D9FD8 45%, transparent);
+  --overlay:        color-mix(in oklch, #000 68%, transparent);
+  color-scheme: dark;
+}

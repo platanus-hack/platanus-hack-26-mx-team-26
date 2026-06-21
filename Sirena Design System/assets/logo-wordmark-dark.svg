@@ -1,0 +1,11 @@
+<svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sirena">
+  <rect x="0" y="4" width="48" height="48" rx="14" fill="#F2502E"></rect>
+  <g stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round">
+    <line x1="13" y1="24" x2="13" y2="32"></line>
+    <line x1="19" y1="20" x2="19" y2="36"></line>
+    <line x1="25" y1="14" x2="25" y2="42"></line>
+    <line x1="31" y1="19" x2="31" y2="37"></line>
+    <line x1="37" y1="23" x2="37" y2="33"></line>
+  </g>
+  <text x="62" y="37" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.5" fill="#F4F2FB">Sirena</text>
+</svg>

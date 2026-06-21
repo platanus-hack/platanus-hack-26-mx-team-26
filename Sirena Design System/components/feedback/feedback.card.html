@@ -1,0 +1,63 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Feedback" subtitle="Badge · StatusPill · ProgressBar · Toast" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin:0; padding:22px; background:var(--bg); font-family:var(--font-body); }
+  .grid { display:flex; flex-direction:column; gap:20px; }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  .lbl { font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:10px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { Badge, StatusPill, ProgressBar, Toast } = window.SirenaDesignSystem_c1cb8e;
+    function Demo() {
+      return (
+        <div className="grid">
+          <div>
+            <div className="lbl">Badges</div>
+            <div className="row">
+              <Badge tone="primary">12 voices</Badge>
+              <Badge tone="signal" icon="badge-check">Consented</Badge>
+              <Badge tone="accent">AI voice</Badge>
+              <Badge tone="success">Resisted</Badge>
+              <Badge tone="warning">Reported late</Badge>
+              <Badge tone="danger">Compromised</Badge>
+            </div>
+          </div>
+          <div>
+            <div className="lbl">Status pills</div>
+            <div className="row">
+              <StatusPill status="live">Live</StatusPill>
+              <StatusPill status="scheduled">Scheduled</StatusPill>
+              <StatusPill status="success">Completed</StatusPill>
+              <StatusPill status="warning">Paused</StatusPill>
+              <StatusPill status="draft">Draft</StatusPill>
+            </div>
+          </div>
+          <div className="two">
+            <ProgressBar label="Voices collected" value={18} max={24} valueLabel="18 / 24" tone="signal" />
+            <ProgressBar label="Annual training" value={50} tone="primary" />
+          </div>
+          <div className="two">
+            <Toast tone="success" title="Simulation launched">We'll notify you as people respond.</Toast>
+            <Toast tone="danger" title="3 people compromised" onClose={()=>{}}>They opened the WhatsApp voice note.</Toast>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+    requestAnimationFrame(() => window.lucide && window.lucide.createIcons());
+  </script>
+</body>
+</html>

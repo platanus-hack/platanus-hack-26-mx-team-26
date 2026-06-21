@@ -1,0 +1,24 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Elevation" subtitle="Soft violet-cast shadows xs → xl" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 26px 22px; background: var(--bg); font-family: var(--font-mono); }
+  .row { display: flex; gap: 22px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .box { width: 92px; height: 64px; background: var(--surface); border-radius: var(--radius-md); }
+  .lbl { font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box" style="box-shadow:var(--shadow-xs)"></div><span class="lbl">xs</span></div>
+    <div class="item"><div class="box" style="box-shadow:var(--shadow-sm)"></div><span class="lbl">sm</span></div>
+    <div class="item"><div class="box" style="box-shadow:var(--shadow-md)"></div><span class="lbl">md</span></div>
+    <div class="item"><div class="box" style="box-shadow:var(--shadow-lg)"></div><span class="lbl">lg</span></div>
+    <div class="item"><div class="box" style="box-shadow:var(--shadow-xl)"></div><span class="lbl">xl</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Data" subtitle="Card · StatCard · RiskMeter · Avatar · WaveBars" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin:0; padding:22px; background:var(--bg); font-family:var(--font-body); }
+  .lbl { font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:10px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .bottom { display:grid; grid-template-columns:auto 1fr; gap:18px; margin-top:20px; align-items:center; }
+  .row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { Card, StatCard, RiskMeter, Avatar, WaveBars, Badge } = window.SirenaDesignSystem_c1cb8e;
+    function Demo() {
+      return (
+        <div>
+          <div className="lbl">Stat cards</div>
+          <div className="stats">
+            <StatCard label="Risk score" value="385" icon="gauge" tone="danger" delta="12" deltaTone="down" foot="Lower is better" />
+            <StatCard label="Voices consented" value="18" unit="/ 24" icon="mic" tone="signal" />
+            <StatCard label="Resisted this week" value="92" unit="%" icon="shield-check" tone="success" delta="8" deltaTone="good-up" />
+          </div>
+          <div className="bottom">
+            <Card>
+              <RiskMeter value={385} max={900} caption="Average" sublabel="Down 12 from last week" size={220} />
+            </Card>
+            <div>
+              <div className="lbl">Avatars · waveform</div>
+              <div className="row" style={{marginBottom:16}}>
+                <Avatar name="Courtney Leacock" status="online" />
+                <Avatar name="Jordan Daly" status="risk" />
+                <Avatar name="Ana Rivera" status="idle" />
+                <Avatar name="Me" size="lg" />
+              </div>
+              <Card variant="soft" padding="sm">
+                <div className="row" style={{justifyContent:'space-between'}}>
+                  <div className="row">
+                    <WaveBars tone="signal" count={11} height={30} />
+                    <Badge tone="signal" icon="badge-check">Consented · 0:32</Badge>
+                  </div>
+                  <WaveBars tone="primary" playing count={9} height={26} />
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+    requestAnimationFrame(() => window.lucide && window.lucide.createIcons());
+  </script>
+</body>
+</html>

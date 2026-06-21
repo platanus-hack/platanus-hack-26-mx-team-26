@@ -1,0 +1,28 @@
+<!-- @dsCard group="Brand" viewport="700x170" name="Waveform motif" subtitle="The one decorative device — voice contexts only" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 26px 24px; background: var(--bg); font-family: var(--font-body); }
+  .wrap { display: flex; align-items: center; gap: 26px; }
+  .wave { display: flex; align-items: center; gap: 5px; height: 70px; }
+  .wave span { width: 6px; border-radius: var(--radius-pill); background: var(--coral-500); animation: bounce 1.1s var(--ease-out) infinite; }
+  .wave.teal span { background: var(--fern-500); }
+  .wave span:nth-child(2){animation-delay:.1s} .wave span:nth-child(3){animation-delay:.2s}
+  .wave span:nth-child(4){animation-delay:.3s} .wave span:nth-child(5){animation-delay:.15s}
+  .wave span:nth-child(6){animation-delay:.25s} .wave span:nth-child(7){animation-delay:.05s}
+  @keyframes bounce { 0%,100%{height:16px} 50%{height:62px} }
+  @media (prefers-reduced-motion: reduce){ .wave span{animation:none;height:40px} }
+  .note { font-size: 13px; color: var(--text-muted); max-width: 30ch; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="wave teal"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <p class="note">Coral = señal de ataque en vivo · Verde = voz consentida / verificada.</p>
+  </div>
+</body>
+</html>

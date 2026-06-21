@@ -1,0 +1,169 @@
+/* ============================================================
+   SIRENA · COLOR TOKENS
+   Warm, human palette inspired by the Wizer references — NO violet/teal.
+   Coral (orange-red) · Crimson (deep berry) · Gold (warm pop) · Fern (green),
+   on warm stone neutrals. Base scales are mode-agnostic; [data-theme]
+   remaps the semantic aliases only.
+   ============================================================ */
+
+:root {
+  /* --- Coral · primary (the energetic "lure") --------------- */
+  --coral-50:  #FFF2ED;
+  --coral-100: #FFE1D6;
+  --coral-200: #FFC2AE;
+  --coral-300: #FF9B7F;
+  --coral-400: #FB7350;
+  --coral-500: #F2502E;   /* primary */
+  --coral-600: #D63E20;
+  --coral-700: #AE2F16;
+  --coral-800: #841F0F;
+
+  /* --- Crimson · accent / secondary (deep berry) ------------ */
+  --crimson-50:  #FBE9F0;
+  --crimson-100: #F5CCDB;
+  --crimson-200: #EA9DB8;
+  --crimson-300: #DA6790;
+  --crimson-400: #C23C6C;
+  --crimson-500: #A21E4A;  /* accent */
+  --crimson-600: #811539;
+  --crimson-700: #5F0F2A;
+
+  /* --- Gold · highlight / warm pop -------------------------- */
+  --gold-50:  #FFF6DD;
+  --gold-100: #FCE8AE;
+  --gold-200: #F8D571;
+  --gold-300: #F3C03A;
+  --gold-400: #E9A50F;     /* highlight */
+  --gold-500: #C8870A;
+  --gold-600: #9E6A07;
+  --gold-700: #7A5108;
+
+  /* --- Fern · signal / positive (voice consented, success) -- */
+  --fern-50:  #E9F6EC;
+  --fern-100: #C8E9D0;
+  --fern-200: #97D5A8;
+  --fern-300: #5FBE7C;
+  --fern-400: #33A257;
+  --fern-500: #1E8344;     /* signal / success */
+  --fern-600: #136231;
+
+  /* --- Neutrals · warm stone -------------------------------- */
+  --n-0:   #FFFFFF;
+  --n-25:  #FBFAF7;
+  --n-50:  #F5F3EF;
+  --n-100: #ECE8E1;
+  --n-200: #DDD8CE;
+  --n-300: #C6BFB1;
+  --n-400: #A39B8B;
+  --n-500: #7A7264;
+  --n-600: #585245;
+  --n-700: #3E3931;
+  --n-800: #29251E;
+  --n-900: #1B1813;
+  --n-950: #100E0A;
+
+  /* --- Semantic status palettes ----------------------------- */
+  --success-50:  #E9F6EC;  --success-500: #1E8344;  --success-600: #136231;
+  --warning-50:  #FDF0DC;  --warning-500: #E5820C;  --warning-600: #B5650A;
+  --danger-50:   #FCEAEA;  --danger-500:  #D92D20;  --danger-600:  #B21F15;
+  --info-50:     #EAF1F6;  --info-500:    #3D6E91;  --info-600:    #2C5371;
+}
+
+/* ============================================================
+   LIGHT MODE (default)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  --bg:             var(--n-50);
+  --bg-pattern:     #E6E0D3;
+  --surface:        var(--n-0);
+  --surface-raised: var(--n-0);
+  --surface-sunken: var(--n-25);
+  --surface-inset:  var(--n-100);
+
+  --border:         var(--n-200);
+  --border-strong:  var(--n-300);
+  --border-faint:   var(--n-100);
+
+  --text-strong:    var(--n-900);
+  --text-body:      var(--n-700);
+  --text-muted:     var(--n-500);
+  --text-faint:     var(--n-400);
+
+  --primary:        var(--coral-500);
+  --primary-hover:  var(--coral-600);
+  --primary-press:  var(--coral-700);
+  --primary-soft:   var(--coral-50);
+  --primary-softer: var(--coral-100);
+  --on-primary:     #FFFFFF;
+
+  --accent:         var(--crimson-500);
+  --accent-hover:   var(--crimson-600);
+  --accent-soft:    var(--crimson-50);
+  --on-accent:      #FFFFFF;
+
+  --signal:         var(--fern-500);
+  --signal-soft:    var(--fern-50);
+
+  --highlight:      var(--gold-400);
+  --highlight-soft: var(--gold-50);
+  --on-highlight:   #3A2A04;
+
+  --success:        var(--success-500);  --success-soft: var(--success-50);
+  --warning:        var(--warning-600);  --warning-soft: var(--warning-50);
+  --danger:         var(--danger-500);   --danger-soft:  var(--danger-50);
+  --info:           var(--info-500);     --info-soft:    var(--info-50);
+
+  --focus-ring:     color-mix(in oklch, var(--coral-500) 45%, transparent);
+  --overlay:        color-mix(in oklch, var(--n-950) 50%, transparent);
+  color-scheme: light;
+}
+
+/* ============================================================
+   DARK MODE · warm charcoal
+   ============================================================ */
+[data-theme="dark"] {
+  --bg:             var(--n-950);
+  --bg-pattern:     #241E12;
+  --surface:        var(--n-900);
+  --surface-raised: #231F18;
+  --surface-sunken: #15120D;
+  --surface-inset:  #262019;
+
+  --border:         #322C22;
+  --border-strong:  #433B2E;
+  --border-faint:   #231F18;
+
+  --text-strong:    #F7F3EA;
+  --text-body:      #D7CFC0;
+  --text-muted:     #9A9081;
+  --text-faint:     #726959;
+
+  --primary:        var(--coral-400);
+  --primary-hover:  var(--coral-300);
+  --primary-press:  var(--coral-500);
+  --primary-soft:   color-mix(in oklch, var(--coral-500) 18%, var(--n-900));
+  --primary-softer: color-mix(in oklch, var(--coral-500) 26%, var(--n-900));
+  --on-primary:     #1A0B06;
+
+  --accent:         var(--crimson-400);
+  --accent-hover:   var(--crimson-300);
+  --accent-soft:    color-mix(in oklch, var(--crimson-500) 24%, var(--n-900));
+  --on-accent:      #1A0710;
+
+  --signal:         var(--fern-400);
+  --signal-soft:    color-mix(in oklch, var(--fern-500) 20%, var(--n-900));
+
+  --highlight:      var(--gold-300);
+  --highlight-soft: color-mix(in oklch, var(--gold-400) 22%, var(--n-900));
+  --on-highlight:   #2A1E03;
+
+  --success: #34B164; --success-soft: color-mix(in oklch, var(--success-500) 20%, var(--n-900));
+  --warning: #F2A53A; --warning-soft: color-mix(in oklch, var(--warning-500) 20%, var(--n-900));
+  --danger:  #F0635A; --danger-soft:  color-mix(in oklch, var(--danger-500) 20%, var(--n-900));
+  --info:    #5E94BC; --info-soft:    color-mix(in oklch, var(--info-500) 20%, var(--n-900));
+
+  --focus-ring:     color-mix(in oklch, var(--coral-400) 50%, transparent);
+  --overlay:        color-mix(in oklch, #000 62%, transparent);
+  color-scheme: dark;
+}

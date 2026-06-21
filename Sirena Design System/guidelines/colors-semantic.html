@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="Semantic · status" subtitle="Resisted · Reported · Compromised + info" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--bg); font-family: var(--font-body); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cell { border-radius: var(--radius-md); padding: 14px; border: 1px solid var(--border); }
+  .dot { width: 14px; height: 14px; border-radius: 50%; }
+  .top { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .lbl { font-weight: 700; font-size: 13px; color: var(--text-strong); }
+  .hex { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .use { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell" style="background:var(--success-soft)">
+      <div class="top"><span class="dot" style="background:var(--success)"></span><span class="lbl">Success</span></div>
+      <div class="hex">--success</div><div class="use">Resisted / safe</div>
+    </div>
+    <div class="cell" style="background:var(--warning-soft)">
+      <div class="top"><span class="dot" style="background:var(--warning)"></span><span class="lbl">Warning</span></div>
+      <div class="hex">--warning</div><div class="use">Reported late</div>
+    </div>
+    <div class="cell" style="background:var(--danger-soft)">
+      <div class="top"><span class="dot" style="background:var(--danger)"></span><span class="lbl">Danger</span></div>
+      <div class="hex">--danger</div><div class="use">Compromised</div>
+    </div>
+    <div class="cell" style="background:var(--info-soft)">
+      <div class="top"><span class="dot" style="background:var(--info)"></span><span class="lbl">Info</span></div>
+      <div class="hex">--info</div><div class="use">Neutral notice</div>
+    </div>
+  </div>
+</body>
+</html>

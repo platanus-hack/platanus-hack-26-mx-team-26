@@ -1,0 +1,10 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sirena">
+  <rect width="96" height="96" rx="26" fill="#F2502E"></rect>
+  <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round">
+    <line x1="26" y1="44" x2="26" y2="52"></line>
+    <line x1="37" y1="36" x2="37" y2="60"></line>
+    <line x1="48" y1="24" x2="48" y2="72"></line>
+    <line x1="59" y1="33" x2="59" y2="63"></line>
+    <line x1="70" y1="42" x2="70" y2="54"></line>
+  </g>
+</svg>
