@@ -37,11 +37,13 @@ function fmtRelative(iso) {
   return "ahora";
 }
 
-/* Group simulaciones into campaigns by guion_texto */
+/* Agrupa sesiones por canal/tipo para mostrar como campañas */
 function buildCampaigns(sims) {
   const map = new Map();
   for (const s of sims) {
-    const key = (s.guion_texto || "Sin guión").trim();
+    // Agrupamos por canal + descripción del resumen (primeras palabras) o por canal solo
+    const snippet = s.guion_texto ? s.guion_texto.slice(0, 60).trim() : null;
+    const key = snippet || s.tipo_canal || "Sin canal";
     if (!map.has(key)) map.set(key, []);
     map.get(key).push(s);
   }
@@ -50,10 +52,10 @@ function buildCampaigns(sims) {
       const dates       = items.map((i) => i.fecha_envio).filter(Boolean).sort();
       const compromised = items.filter((i) => simOutcome(i) === "compromised").length;
       const resisted    = items.filter((i) => simOutcome(i) === "resisted").length;
-      const waiting     = items.filter((i) => i.estado !== "borrador" && simOutcome(i) === "sent").length;
+      const waiting     = items.filter((i) => i.estado === "active" || i.estado === "pendiente").length;
       const resolved    = compromised + resisted;
       const fallRate    = resolved > 0 ? Math.round((compromised / resolved) * 100) : null;
-      const status      = waiting > 0 ? "live" : resolved === items.length ? "done" : "draft";
+      const status      = waiting > 0 ? "live" : resolved > 0 ? "done" : "draft";
       return { id: `camp-${idx}`, script, items, dateStart: dates[0] || null, dateEnd: dates[dates.length - 1] || null, total: items.length, compromised, resisted, waiting, resolved, fallRate, status };
     })
     .sort((a, b) => (b.dateStart || "") > (a.dateStart || "") ? 1 : -1);
@@ -62,7 +64,7 @@ function buildCampaigns(sims) {
 function campStatus(c) {
   if (c.status === "live")  return { label: "En curso",   tone: "waiting" };
   if (c.status === "done")  return { label: "Completada", tone: "success" };
-  return                           { label: "Borrador",   tone: "draft"   };
+  return                           { label: "Pendiente",  tone: "draft"   };
 }
 
 /* ─── photo avatar ─────────────────────────────────────────────────── */
@@ -133,7 +135,7 @@ function DetailPanel({ sim, onClose }) {
   const isDraft   = sim.estado === "borrador";
   const name      = sim.empleados?.nombre_completo || "Sin destinatario";
   const dept      = sim.empleados?.departamento    || "—";
-  const hasFallen = sim.segundos_en_caer != null;
+  const hasFallen = outcome === "compromised";
   const panelRef  = useRef(null);
   const tlRef     = useRef(null);
 
@@ -152,11 +154,11 @@ function DetailPanel({ sim, onClose }) {
   }, [sim.id]);
 
   const tl = [
-    { label: "Simulación creada",     time: fmtDateTime(sim.fecha_envio),      done: true },
-    { label: "Llamada enviada",        time: fmtDateTime(sim.fecha_envio),      done: !!sim.fecha_envio },
-    { label: "Interacción registrada", time: sim.fecha_interaccion ? fmtDateTime(sim.fecha_interaccion) : "Sin respuesta aún", done: !!sim.fecha_interaccion },
+    { label: "Sesión iniciada",        time: fmtDateTime(sim.fecha_envio),      done: true },
+    { label: "Canal",                  time: sim.tipo_canal || "—",             done: true },
+    { label: "Finalizada",             time: sim.fecha_interaccion ? fmtDateTime(sim.fecha_interaccion) : "En curso", done: !!sim.fecha_interaccion },
     { label: hasFallen ? "Cayó" : outcome === "resisted" ? "Resistió" : "Resultado pendiente",
-      time:  hasFallen ? `${sim.segundos_en_caer}s desde el envío` : outcome === "resisted" ? "Identificó el intento" : "En curso",
+      time:  hasFallen ? "Credenciales comprometidas" : outcome === "resisted" ? "Identificó el intento" : "En curso",
       done:  hasFallen || outcome === "resisted", risk: hasFallen },
   ];
 
@@ -177,13 +179,12 @@ function DetailPanel({ sim, onClose }) {
         </div>
         <div className="dp__strip">
           <div className="dp__strip-item"><span className="dp__strip-lbl">Resultado</span><OutcomeBadge outcome={outcome} isDraft={isDraft} /></div>
-          {hasFallen && <div className="dp__strip-item"><span className="dp__strip-lbl">Tiempo en caer</span><span className="dp__strip-val dp__strip-val--danger">{sim.segundos_en_caer}s</span></div>}
+          {hasFallen && <div className="dp__strip-item"><span className="dp__strip-lbl">Resultado</span><span className="dp__strip-val dp__strip-val--danger">Comprometido</span></div>}
           <div className="dp__strip-item"><span className="dp__strip-lbl">Enviada</span><span className="dp__strip-val">{fmtDateTime(sim.fecha_envio)}</span></div>
           {sim.repertorio_voces?.elevenlabs_voice_id && <div className="dp__strip-item"><span className="dp__strip-lbl">Voz IA</span><span className="dp__strip-val dp__strip-val--mono">{sim.repertorio_voces.elevenlabs_voice_id}</span></div>}
         </div>
         <div className="dp__body">
-          <div className="dp__section"><div className="dp__section-label">Guión</div><p className="dp__script">{sim.guion_texto || "Sin guión"}</p></div>
-          {sim.audio_url && <div className="dp__section"><div className="dp__section-label">Audio</div><audio controls src={sim.audio_url} className="dp__audio" /></div>}
+          {sim.guion_texto && <div className="dp__section"><div className="dp__section-label">Resumen de la sesión</div><p className="dp__script">{sim.guion_texto}</p></div>}
           <div className="dp__section">
             <div className="dp__section-label">Cronología</div>
             <ol className="dp__tl" ref={tlRef}>
@@ -294,10 +295,10 @@ function CampaignCard({ camp, sel, onSelectSim, maxFall, index }) {
           </div>
           {camp.items.map((s) => {
             const outcome   = simOutcome(s);
-            const isDraft   = s.estado === "borrador";
+            const isDraft   = s.estado === "pendiente";
             const name      = s.empleados?.nombre_completo || "Sin destinatario";
             const dept      = s.empleados?.departamento || "—";
-            const hasFallen = s.segundos_en_caer != null;
+            const hasFallen = outcome === "compromised";
             const isActive  = sel?.id === s.id;
             return (
               <div
@@ -312,9 +313,9 @@ function CampaignCard({ camp, sel, onSelectSim, maxFall, index }) {
                     <span className="ccamp__person-dept">{dept}</span>
                   </div>
                 </div>
-                <OutcomeBadge outcome={outcome} isDraft={isDraft} />
+                <OutcomeBadge outcome={outcome} isDraft={isDraft && simOutcome(s) === "sent"} />
                 <span className="ccamp__date">{fmtRelative(s.fecha_envio)}</span>
-                <FallBar seconds={s.segundos_en_caer} max={maxFall} />
+                <FallBar seconds={null} max={maxFall} />
               </div>
             );
           })}
@@ -373,7 +374,7 @@ export function CampaignsScreen() {
   }, [empresaId]);
 
   const camps   = useMemo(() => (sims ? buildCampaigns(sims) : []), [sims]);
-  const maxFall = useMemo(() => (sims ? sims.reduce((m, s) => (s.segundos_en_caer != null ? Math.max(m, s.segundos_en_caer) : m), 1) : 1), [sims]);
+  const maxFall = 1;
 
   const filtered = useMemo(() => {
     if (filterStatus === "all") return camps;

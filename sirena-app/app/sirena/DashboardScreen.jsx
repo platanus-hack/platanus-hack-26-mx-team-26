@@ -967,7 +967,7 @@ export function DashboardScreen({ openCampaigns }) {
   const consentedCount = isMock ? ms.consentedCount : people.filter((p) => p.voice === "consented").length;
   const pendingCount  = isMock ? ms.pendingCount   : people.filter((p) => p.voice === "pending").length;
   const expiredCount  = isMock ? ms.expiredCount   : people.filter((p) => p.voice === "expired").length;
-  const activeSims = isMock ? ms.activeSims : sims.filter((s) => s.estado !== "borrador" && simOutcome(s) === "sent").length;
+  const activeSims = isMock ? ms.activeSims : sims.filter((s) => s.estado === "active" || s.estado === "pendiente").length;
   const recent = isMock ? (ms.recentSims || []) : sims.slice(0, 5);
 
   // Weekly breakdown
@@ -1018,15 +1018,15 @@ export function DashboardScreen({ openCampaigns }) {
   ];
 
   // ── Campaigns panel (bottom right)
-  const recentSentSims = sims.filter((s) => s.estado !== "borrador").slice(0, 8);
+  const recentSentSims = sims.slice(0, 8);
   const campaigns = isMock
     ? {
         live:      (ms.recentSims || []).filter((s) => s.outcome === "sent"),
         completed: (ms.recentSims || []).filter((s) => s.outcome !== "sent"),
       }
     : {
-        live:      sims.filter((s) => s.estado !== "borrador" && simOutcome(s) === "sent"),
-        completed: sims.filter((s) => s.estado !== "borrador" && simOutcome(s) !== "sent"),
+        live:      sims.filter((s) => s.estado === "active" || s.estado === "pendiente"),
+        completed: sims.filter((s) => s.estado === "done" || s.estado === "error"),
       };
 
   const riskFactors = buildRiskFactors({
@@ -1231,8 +1231,8 @@ export function DashboardScreen({ openCampaigns }) {
                         <div className="act__name">{s.empleados?.nombre_completo || "Sin destinatario"}</div>
                         <div className="act__meta">{s.empleados?.departamento || "—"} · {fmtRelative(s.fecha_envio)}</div>
                       </div>
-                      <StatusPill status={s.estado === "borrador" ? "draft" : oc === "compromised" ? "live" : oc === "resisted" ? "success" : "scheduled"}>
-                        {s.estado === "borrador" ? "Borrador" : OUTCOME_LABEL[oc]}
+                      <StatusPill status={oc === "compromised" ? "live" : oc === "resisted" ? "success" : "scheduled"}>
+                        {OUTCOME_LABEL[oc]}
                       </StatusPill>
                     </div>
                   );

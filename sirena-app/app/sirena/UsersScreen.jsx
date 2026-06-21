@@ -86,7 +86,7 @@ function buildReportData(person) {
   const user = person.email.split("@")[0];
   const sid = simId(lastSim);
   const dateStr = fmtFull(lastSim?.fecha_envio);
-  const fellTime = secondsToMMSS(lastSim?.segundos_en_caer);
+  const fellTime = r.isCompromised ? "< 2 min" : null;
   const transcript = (isCompromised ? COMPROMISED_TRANSCRIPT : RESISTED_TRANSCRIPT).map((t) => ({
     ...t,
     who: t.who.replace("{name}", person.name).replace("{first}", first),
@@ -652,8 +652,8 @@ function PersonModal({ person, onClose, voces }) {
                       <div key={s.id} className="pd-sim-row">
                         <div className={"pd-sim-dot pd-sim-dot--" + outcome} />
                         <div className="pd-sim-main">
-                          <div className="pd-sim-name">{s.guion_texto || "Simulación"}</div>
-                          <div className="pd-sim-meta">{fmtDate(s.fecha_envio)}{s.segundos_en_caer ? ` · Cayó en ${secondsToMMSS(s.segundos_en_caer)}` : ""}</div>
+                          <div className="pd-sim-name">{s.tipo_canal || s.guion_texto || "Sesión"}</div>
+                          <div className="pd-sim-meta">{fmtDate(s.fecha_envio)}</div>
                         </div>
                         <Badge tone={RESULT[outcome].tone} size="sm">{RESULT[outcome].label}</Badge>
                       </div>

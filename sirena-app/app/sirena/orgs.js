@@ -19,8 +19,7 @@ export const ORGS = [
     badgeColor: "#fff",
     description: "Equipo de producto e ingeniería",
     useRealData: true,
-    // UUID de la fila en public.empresas — null = sin filtro (muestra todos los empleados)
-    empresaId: null,
+    empresaId: "aaaaaaaa-0000-0000-0000-000000000001",
   },
   {
     id: "altur",
@@ -39,8 +38,9 @@ export const ORGS = [
     badgeBg: "#1C1C1E",
     badgeColor: "#fff",
     description: "Consultoría de riesgos corporativos",
-    useRealData: false,
-    // Mock data for Altur
+    useRealData: true,
+    empresaId: "aaaaaaaa-0000-0000-0000-000000000002",
+    // Mock data for Altur (fallback)
     mockStats: {
       peopleCount: 34,
       avgResistance: 41,
